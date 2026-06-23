@@ -1,3 +1,3 @@
-# Flighty Mango
+# Farm Simulator
 
-Preact + Vite + Eslint + Prettier + TailwindCSS
+Farming Game Simulator
