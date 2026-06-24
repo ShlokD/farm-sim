@@ -4,16 +4,20 @@ import { Dispatch, useState } from "preact/hooks";
 import { WarehouseItem } from "./types";
 
 type FarmContextType = {
-  warehouse: Array<WarehouseItem>;
-  setWarehouse: Dispatch<SetStateAction<Array<WarehouseItem>>>
+  warehouse: WarehouseItem;
+  setWarehouse: Dispatch<SetStateAction<WarehouseItem>>;
 };
 const FarmContext = createContext<FarmContextType>({
-  warehouse: [],
+  warehouse: {},
   setWarehouse: () => {},
 });
 
-export const FarmContextProvider = ({ children }: {children: ComponentChildren}) => {
-  const [warehouse, setWarehouse] = useState<Array<WarehouseItem>>([]);
+export const FarmContextProvider = ({
+  children,
+}: {
+  children: ComponentChildren;
+}) => {
+  const [warehouse, setWarehouse] = useState<WarehouseItem>({});
   return (
     <FarmContext.Provider value={{ warehouse, setWarehouse }}>
       {children}
