@@ -16,7 +16,7 @@ const Fields = () => {
   const [showCropDialog, setShowCropDialog] = useState(false);
   const [plotIndex, setPlotIndex] = useState(-1);
   const [fields, setFields] = useState<FieldCrop[]>(
-    new Array(4).fill(0).map(() => ({ ...EMPTY_PLOT })),
+    new Array(48).fill(0).map(() => ({ ...EMPTY_PLOT })),
   );
 
   const { warehouse, setWarehouse } = useContext(FarmContext);
@@ -100,21 +100,23 @@ const Fields = () => {
 
   return (
     <div className="flex flex-col w-full h-full gap-10">
-      <div className="grid grid-cols-4 gap-0 place-items-center grid-flow-col-dense">
+      <div className="grid grid-cols-6 grid-rows-8 gap-0 gap-y-2 place-items-center grid-flow-col-dense">
         {fields.map((field, i) => {
           if (field.name === "") {
             return (
               <button
                 key={`crop-${i}`}
                 onClick={() => selectCrop(i)}
-                className="w-20 h-20 bg-amber-950"></button>
+                className="w-20 h-20 bg-amber-950 cursor-pointer"
+              ></button>
             );
           }
           return (
             <button
               key={`crop-${i}`}
               onClick={() => harvestCrop(i)}
-              className={`w-20 h-20 ${field.state === FieldsState.READY ? "bg-blue-500" : "bg-green-500"}`}>
+              className={`cursor-pointer w-20 h-20 ${field.state === FieldsState.READY ? "bg-blue-500" : "bg-green-500"}`}
+            >
               {field.icon} {field.time}
             </button>
           );
@@ -137,24 +139,29 @@ const Fields = () => {
         </div>
       </div>
       <div
-        className="flex gap-2 flex-col fixed bottom-0 border-4 transition-transform duration-150 rounded-xl w-11/12 p-4 items-center justify-center"
+        className="flex gap-2 flex-col bg-white fixed bottom-0 border-4 transition-transform duration-150 rounded-xl w-11/12 p-4 items-center justify-center"
         style={{
-          height: "200px",
+          height: "400px",
           transform: `translateY(${showCropDialog ? "20px" : "1000px"})`,
-        }}>
-        {availableCrops.map((aCrop, i) => {
-          return (
-            <button
-              key={`available-${i}`}
-              className="w-3/4 p-4 bg-green-100 rounded-xl font-bold"
-              onClick={() => plantCrop(i)}>
-              {aCrop.icon} {aCrop.name}
-            </button>
-          );
-        })}
+        }}
+      >
+        <div className="grid grid-cols-2 gap-2">
+          {availableCrops.map((aCrop, i) => {
+            return (
+              <button
+                key={`available-${i}`}
+                className="p-8 text-2xl bg-green-100 rounded-xl font-bold cursor-pointer"
+                onClick={() => plantCrop(i)}
+              >
+                {aCrop.icon} {aCrop.name}
+              </button>
+            );
+          })}
+        </div>
         <button
-          className="p-4 w-1/2 bg-red-400 font-bold text-white rounded-xl"
-          onClick={closeDialog}>
+          className="p-4 w-1/2 bg-red-400 font-bold text-white rounded-xl cursor-pointer"
+          onClick={closeDialog}
+        >
           Cancel
         </button>
       </div>

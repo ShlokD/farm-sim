@@ -42,6 +42,7 @@ export default defineConfig([globalIgnores(["**/node_modules"]), {
             jsx: true,
         },
     },
+    ignores: ["node_modules"]
 
     rules: {
         "no-console": "error",

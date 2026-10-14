@@ -4,4 +4,16 @@ export const rice = {
   time: 5,
 };
 
-export const availableCrops = [rice];
+export const wheat = {
+  name: "Wheat",
+  icon: "🌿",
+  time: 4,
+};
+
+export const cotton = {
+  name: "Cotton",
+  icon: "🌼",
+  time: 12,
+};
+
+export const availableCrops = [rice, wheat, cotton];
